@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}
+Update Post
+{% endblock %}
+{% block body %}
+<div class="container mt-5 pt-5 mb-5 d-flex justify-content-center">
+  <div class="card" style="width: 500px;">
+    <div class="card-body">
+      <form action="/blog/update/{{posts.id}}/" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <div class="col-12">
+          <label for="from-label">Title</label>
+          <input type="text" value="{{posts.title}}" name="title" class="form-cotrol" placeholder="title" required>
+        </div>
+        <div class="col-12">
+          <label class="from-label">Body</label>
+          <input type="text" value="{{posts.body}}" name="body" class="form-cotrol" placeholder="body" required>
+        </div>
+        <div class="col-12">
+          <label class="form-label">Category</label>
+          <select class="form-select" name="category">
+          {% for i in category %}
+          <option value="{{ i.id }}" {% if i.id == posts.category_id %} selected {% endif %}> {{ i.name }}
+         </option>
+          {% endfor %}
+          </select>
+          </div>
+          <div class="col-12">
+          <label class="form-label">Image</label>
+          {% if posts.image %}
+          <p>File uploaded at: <a href="{{posts.image.url}}">{{posts.image}}</a></p>
+          {% endif %}
+          <input type="file" name="image" class="form-control">
+          </div><br>
+        <!-- <div class="col-12">
+          <label class="from-label">Create At</label>
+          <input type="datetime-local" value="{{posts.created_at}}" name="created" class="form-cotrol" required>
+        </div><br> -->
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

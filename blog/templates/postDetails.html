@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}
+Post Detail
+{% endblock %}
+{% block body %}
+<div class="container my-5 mx-auto d-flex justify-content-center row" style="width: 900px;">
+  <div class="card" mb-4>
+    <div class="card-header">
+      <h1 class="mb-4">Post Detail</h1>
+    </div>
+    <div class="card-body">
+      <h2 class="card-title">{{posts.title}}</h2>
+      <p class="card-text">{{posts.body}}</p>
+      <p class="card-text">
+        <small class="text-muted">By Aung Aung,{{posts.created_at}}</small>
+      </p>
+      <a href="/blog/update/{{posts.id}}/" class="btn btn-primary">Edit</a>
+      <a href="/blog/delete/{{posts.id}}/" class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
